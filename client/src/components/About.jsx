@@ -1,15 +1,15 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import Header from './Header'
 import '../App.css';
 import Footer from './Footer';
-
 // import 'bootstrap/dist/css/bootstrap.min.css';
-
+    
 function About() {
+
   return (
       
     <div >
-
+       
         <Header />
         <div className=" App" >
 

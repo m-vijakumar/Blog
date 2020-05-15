@@ -10,13 +10,18 @@ const blogSchema = new Schema({
         type: String,
         require:true
     },
-    date:{
+    category :{
+        type: String,
+        require:true
+    },
+
+    createdOn:{
         type:Date,
         default :Date.now
     }
     
 })
 
-    
+
 
 const blog = module.exports = mongoose.model("blogPosts",blogSchema);
