@@ -18,7 +18,7 @@ router.post("/create",tokenHelper.sessionVerfiy,blogController.create)
 // @desc    starting router
 // @access  PRAVITE 2
 
-router.post("/all-posts",blogController.getAllPosts)
+router.get("/all-posts",blogController.getAllPosts)
 
 
 // @type    GET

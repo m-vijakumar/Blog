@@ -1,22 +1,51 @@
-import React ,{useState} from 'react'
+import React ,{useState,useEffect} from 'react'
+import { useLocation, useHistory } from 'react-router-dom';
+import Footer from './Footer';
+import Header from './Header';
 const Markdown = require('react-markdown');
 export default function Blogpage() {
     const [content, setContent] = useState("");
+    const [postId , setPostId] = useState("");
+    // const [postName , setPostName] = useState("");
+    const location = useLocation();
+    const history = useHistory();
+    const getContent = async(e)=>{
+        // e.persist();
+        console.log(postId)
+        const response = await fetch('/api/admin/blog/post' , {
+            method: "POST",
+            headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
 
-    const handleChange = (e)=>{
-        setContent(e.target.value)
+            },
+            mode:"cors",
+            body :JSON.stringify({postId:location.pathname.split("/")[2]})
+        })
+    
+        const data = await response.json();
+        console.log(data.data)
+        setContent(data.data.content)
+
     }
-    return (
-    <div>
-        <div>
-            <textarea onChange={handleChange} rows="15" cols="15" className="form-control" 
-            placeholder="Enter Html Code For Your Blog Page bootstrap 4.4.1 already addeed use 4.4.1 
-             https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></textarea>
-        </div>
 
-        <div>
+    useEffect(()=>{
+        try {
+            
+            // setPostId(location.pathname.split("/")[2]);
+            getContent();
+        } catch (error) {
+            history.push("/")
+        }
+    },[])
+    return (
+        <>
+        <Header />
+    <div className="jumbotron" style={{backgroundColor:"transparent"}}>
+
         <Markdown source={content} escapeHtml={false} />
-        </div>
     </div>
+    <Footer/>
+    </>
     )
 }

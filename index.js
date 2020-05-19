@@ -5,6 +5,7 @@ const expressValidator = require('express-validator');
 require('dotenv').config({path:'./.env'});
 const helmet = require("helmet");
 const path = require("path");
+const cors = require("cors")
 const session = require("express-session");
 const app = express(); 
 
@@ -24,13 +25,14 @@ app.use(session({
     cookie:{
         maxAge : 3600000 * 24 *7 ,
         secure : process.env.NODE_ENV === 'production'
-    }
+    },
+    maxAge : 3600000 * 24 *7 
 }))
 
 app.use(express.static("./public"));
-
+app.use(cors());
 app.use("/api/admin",require("./routers/api/auth"));
-app.use("/api/admin/blog",require("./routers/api/auth"));
+app.use("/api/admin/blog",require("./routers/api/blog"));
 
 const db =require("./setup/connect").mongodbURL;
 const s =async()=>{ 
@@ -50,6 +52,6 @@ app.get("/",(req,res)=>{
 });
 
 
-app.listen(port,console.log("server is running.........."));
+app.listen(port,console.log(`server is running on ${port}..........`));
 
 module.exports=app;

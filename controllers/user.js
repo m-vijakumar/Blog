@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const key =require("../setup/connect").TOKEN_KEY;
-
 exports.ss =(req,res)=>{
 
     return res.send(req.session.user)
@@ -20,7 +19,7 @@ exports.registervalidCredentials = (req,res,next) =>{
            console.log( result.array()[0].msg)
             return res.status(400).json({
                 error : 'invalid inputs',
-                message : result.array()[0].msg
+                msg : result.array()[0].msg
             })
         }
         next();
@@ -38,9 +37,9 @@ exports.loginValidCredentials = (req,res,next) =>{
         if(!result.isEmpty()){
             // result.useFirstErrorOnly();.array({useFirstErrorOnly:true});
            console.log( result.array()[0].msg)
-            return res.status(400).render('login',{
+            return res.status(400).json({
                 error : 'invalid inputs',
-                message : result.array()[0].msg
+                msg : result.array()[0].msg
             })
         }
         next();
@@ -60,7 +59,7 @@ exports.register = (req,res) =>{
                 // console.log(result+"&&"+result._id)
                 return res.status(400).json({
                     error: true,
-                     message: "USER_ALREADY_EXISTS"
+                     msg: "USER_ALREADY_EXISTS"
                 });
             }
 
@@ -76,13 +75,17 @@ exports.register = (req,res) =>{
                         }  
                         try {
                             req.session.user = userData ;
-                            return res.json({ success:true})
+                            return res.json({
+                                 error:false,
+                                 success:true
+                                })
                         } catch (error) {
                             return res.json({
                                 error:true,
                                 msg:"internal Error...!"
                             })
                         }   
+
                 })
                 .catch(e=>{
                     console.log(e);
@@ -110,11 +113,12 @@ exports.login= (req,res)=>{
 
     User.checkIfUserExists(email)
         .then(async(result)=>{
-
+            console.log(result)
             if( !result || !result._id){
-                return res.render('login',{
+                
+                return res.json({
                     error: true,
-                     message: "USER_DOESN'T_FOUND"
+                     msg: "USER_DOESN'T_FOUND"
                 });
             }
                     const userData = {
@@ -132,7 +136,9 @@ exports.login= (req,res)=>{
 
                         try {
                             req.session.user = payload ;
-                            return res.json({ success:true})
+                            return res.json({ 
+                                error:false,
+                                success:true})
                         } catch (error) {
                             return res.json({
                                 error:true,

@@ -11,6 +11,20 @@ const tokenHelper = require("../../helpers/sessionVerfiy")
 // @desc    starting router
 // @access  PUBLIC
 
+router.get("/auth/verfiy",tokenHelper.sessionVerfiy,(req,res)=>{
+
+    res.json({
+        error:false,
+        success:true,
+        msg:req.session.id
+    })
+});
+
+// @type    put
+//@route    /api/admin/auth/register
+// @desc    starting router
+// @access  PUBLIC
+
 router.post("/auth/register",userController.registervalidCredentials,userController.register);
 
 // @type    POST
@@ -24,6 +38,6 @@ router.post("/auth/login",userController.loginValidCredentials,userController.lo
 // @desc    starting router
 // @access  PRAVITE 
 
-router.get("/logout",tokenHelper.sessionVerfiy, userController.logout )
+router.delete("/logout",tokenHelper.sessionVerfiy, userController.logout )
 
 module.exports =router;

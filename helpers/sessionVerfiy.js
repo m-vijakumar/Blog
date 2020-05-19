@@ -5,7 +5,8 @@ exports.sessionVerfiy =(req,res,next)=>{
     }else{
         return res.json({
             error:true,
-            success:false
+            success:false,
+            
         })
     }
 
