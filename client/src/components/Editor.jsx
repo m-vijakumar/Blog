@@ -12,7 +12,9 @@ export default function Editor(props) {
         await setContent(props.setContent)
     }
     useEffect(() => {
+        const aboutController = new AbortController()
         setdata()
+        return ()=>aboutController.abort()
     }, [props])
     return (
     <div>

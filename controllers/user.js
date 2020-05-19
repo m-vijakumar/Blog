@@ -18,7 +18,7 @@ exports.registervalidCredentials = (req,res,next) =>{
             // result.useFirstErrorOnly();.array({useFirstErrorOnly:true});
            console.log( result.array()[0].msg)
             return res.status(400).json({
-                error : 'invalid inputs',
+                error : true,
                 msg : result.array()[0].msg
             })
         }
@@ -38,7 +38,7 @@ exports.loginValidCredentials = (req,res,next) =>{
             // result.useFirstErrorOnly();.array({useFirstErrorOnly:true});
            console.log( result.array()[0].msg)
             return res.status(400).json({
-                error : 'invalid inputs',
+                error : true,
                 msg : result.array()[0].msg
             })
         }
@@ -88,7 +88,7 @@ exports.register = (req,res) =>{
 
                 })
                 .catch(e=>{
-                    console.log(e);
+                    // console.log(e);
                     return res.json({
                         error:true,
                         msg:"internal Error...!"
@@ -113,7 +113,7 @@ exports.login= (req,res)=>{
 
     User.checkIfUserExists(email)
         .then(async(result)=>{
-            console.log(result)
+            // console.log(result)
             if( !result || !result._id){
                 
                 return res.json({

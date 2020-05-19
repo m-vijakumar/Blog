@@ -43,7 +43,7 @@ userSchema.statics.checkIfUserExists = async(email)=>{
     return await User
       .findOne({email:email})
       .then((result)=>{
-          console.log(result)
+        //   console.log(result)
           return result;
       })
       .catch(()=>{
@@ -55,7 +55,7 @@ userSchema.statics.checkIfUserExists = async(email)=>{
     return await User
       .findOne({_id:userId})
       .then((result)=>{
-          console.log(result)
+        //   console.log(result)
           return result;
       })
       .catch(()=>{

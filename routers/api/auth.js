@@ -6,10 +6,10 @@ const userController = require("../../controllers/user")
 const tokenHelper = require("../../helpers/sessionVerfiy")
 
 
-// @type    POST
+// @type    GET
 //@route    /api/admin/auth/register
 // @desc    starting router
-// @access  PUBLIC
+// @access  PRAVITE
 
 router.get("/auth/verfiy",tokenHelper.sessionVerfiy,(req,res)=>{
 
@@ -20,7 +20,7 @@ router.get("/auth/verfiy",tokenHelper.sessionVerfiy,(req,res)=>{
     })
 });
 
-// @type    put
+// @type    POST
 //@route    /api/admin/auth/register
 // @desc    starting router
 // @access  PUBLIC
@@ -33,8 +33,8 @@ router.post("/auth/register",userController.registervalidCredentials,userControl
 // @access  PUBLIC
 router.post("/auth/login",userController.loginValidCredentials,userController.login);
 
-// @type    GET
-//@route    /api/admin/auth/login
+// @type    DELETE
+//@route    /api/admin/auth/logout
 // @desc    starting router
 // @access  PRAVITE 
 

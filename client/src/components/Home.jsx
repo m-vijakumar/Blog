@@ -1,13 +1,17 @@
 import React ,{useEffect,useState}from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import "./../App.css"
  const Home = () => {
 
     const [posts, setPosts] = useState([])
+    const [isSpinner,setSpinner] =useState(true);
+
     const showPosts = posts.map((post)=>{
         const postname = post.title.trim().replace(/ /g,"-")
         return <li key={post._id} > <h6><a href={`/blog/${post._id}/${postname}`}>{post.title}</a>{" "}{post.createdOn}{" "}[{post.category}]</h6> </li>
     })
+
     const getAllPosts = async()=>{
         const resp = await fetch("/api/admin/blog/all-posts");
         const postsData = await resp.json();
@@ -18,7 +22,18 @@ import Footer from './Footer'
 
     useEffect(() => {
        getAllPosts();
+       setSpinner(false)
     }, [])
+
+    if (isSpinner) {
+        return (
+        <div className="d-flex justify-content-center " >
+            <div className="spinner-border" role="status" id="spinner">
+                <span className="sr-only">Loading...</span>
+            </div>
+        </div>
+        )
+    }else{
     return (
         <div>
             <Header />
@@ -32,6 +47,7 @@ import Footer from './Footer'
             <Footer />
         </div>
     )
+    }
 }
 
 export default  Home;

@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react'
     try{
     const resp = await fetch("/api/admin/auth/verfiy");
     const data = await resp.json();
-    console.log(data)
+    // console.log(data)
          if(data.success === true){
             props.history.push("/admin/dashboard");
          }
@@ -27,10 +27,11 @@ import { useState, useEffect } from 'react'
     }
     }
   useEffect( () => {
-
-      console.log("sssss")
+    
+      // console.log("sssss")
       userlog();
       setSpinner(false)
+     
   },[]);
 
 
@@ -64,11 +65,11 @@ import { useState, useEffect } from 'react'
   })
   
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
    
       if (data.error === false) {
       
-        console.log(data.success)
+        // console.log(data.success)
         props.history.push("/admin/dashboard");
         setSpinner1(false)
         // return <Redirect to="/Dashboard" />
@@ -92,8 +93,10 @@ import { useState, useEffect } from 'react'
 const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Register"} className="btn btn-success " onClick={handleSubmit} />
     if (isSpinner) {
       return (
-        <div className="spinner-border " role="status" id="spinner">
-        <span className="sr-only">Loading...</span>
+        <div className="d-flex justify-content-center " >
+            <div className="spinner-border" role="status" id="spinner">
+                <span className="sr-only">Loading...</span>
+            </div>
         </div> 
       )
   }else{

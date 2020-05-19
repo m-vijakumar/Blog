@@ -7,15 +7,15 @@ export default function Create(props) {
 
   const [postData, setPostData] = useState({});
   const [postContent, setPostContent] = useState("");
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [isSpinner,setSpinner] =useState(true);
-  const [show,setShow] =useState(false);
+  // const [show,setShow] =useState(false);
   const [isSpinner1,setSpinner1] =useState(false);
   const userlog= async ()=>{
     try{
     const resp = await fetch("/api/admin/auth/verfiy");
     const data = await resp.json();
-    console.log(data)
+    // console.log(data)
          if(data.success === false){
             props.history.push("/admin/login");
          }
@@ -26,8 +26,6 @@ export default function Create(props) {
     }
     }
 
-    
-
     const getContent = (content)=>{
             setPostContent(content)
     }
@@ -35,11 +33,10 @@ export default function Create(props) {
     const handleChange = e => {
    
         setPostData({ ...postData, [e.target.name]: e.target.value });
-        //console.log("vijay")
       };
 
       useEffect(()=>{
-        console.log("sssss")
+        // console.log("sssss")
         userlog();
         setSpinner(false)
     },[])
@@ -48,7 +45,7 @@ export default function Create(props) {
         try{
         if( !postData.title ||! postData.category ){
     
-          setMessage("fill the details")
+          alert("fill the details")
         }else{
             
         const postdata = {
@@ -71,20 +68,19 @@ export default function Create(props) {
         body :JSON.stringify(postdata)
       })
       const data = await response.json();
-      console.log(data)
+      // console.log(data)
       if (data.error === false) {
        
-        console.log(data.success)
+        // console.log(data.success)
+        alert("Post Added");
          props.history.push("/admin/dashboard");
          setSpinner1(false)
-        //  setShow(true)
-        //return <Redirect to="/Dashboard" />
         
-      }else{setSpinner1(false) ;setMessage(data.msg) }
+      }else{setSpinner1(false) ;alert(data.msg) }
     
         }
       }catch(e){setSpinner1(false) ;
-         setMessage("Internal Error...")
+         alert("Internal Error...")
          console.log(e)
         }
       }
@@ -97,8 +93,10 @@ export default function Create(props) {
     const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Add Post"} className="btn btn-primary float-right" onClick={handleSubmit} />
         if (isSpinner) {
           return (
-            <div className="spinner-border " role="status" id="spinner">
-            <span className="sr-only">Loading...</span>
+            <div className="d-flex justify-content-center " >
+              <div className="spinner-border" role="status" id="spinner">
+                  <span className="sr-only">Loading...</span>
+              </div>
             </div> 
           )
       }else{

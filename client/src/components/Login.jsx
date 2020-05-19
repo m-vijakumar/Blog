@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import "./../App.css";
 function Login(props){
-
+  const abortController = new AbortController()
   const [userData, setUserData] = useState({});
   const [errMessage, setErrMessage] = useState("");
   const [isSpinner,setSpinner] =useState(true);
@@ -10,9 +10,9 @@ function Login(props){
   const userlog= async ()=>{
 
     try{
-    const resp = await fetch("/api/admin/auth/verfiy");
+    const resp = await fetch("/api/admin/auth/verfiy",{signal:abortController.signal});
     const data = await resp.json();
-    console.log(data)
+    // console.log(data)
          if(data.success === true){
             props.history.push("/admin/dashboard");
          }
@@ -24,9 +24,12 @@ function Login(props){
     }
 
     useEffect(()=>{
-        console.log("sssss")
+        
+        // console.log("sssss")
         userlog();
         setSpinner(false)
+
+        return ()=> abortController.abort()
     },[])
 
   const handleChange = e => {
@@ -60,15 +63,15 @@ function Login(props){
     body :JSON.stringify(userdata)
   })
   const data = await response.json();
-  console.log(data)
+  // console.log(data)
   if (data.error === false) {
    
-    console.log(data.success)
+    // console.log(data.success)
      props.history.push("/admin/dashboard");
      setSpinner1(false)
     //return <Redirect to="/Dashboard" />
     
-  }else{setSpinner1(false) ;setErrMessage(data.msg) }
+  }else{setSpinner1(false) ;setErrMessage("internal Error...!") }
 
     }
   }catch(e){setSpinner1(false) ;
@@ -84,8 +87,10 @@ function Login(props){
 const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Login"} className="btn btn-success " onClick={handleSubmit} />
     if (isSpinner) {
       return (
-        <div className="spinner-border " role="status" id="spinner">
-        <span className="sr-only">Loading...</span>
+        <div className="d-flex justify-content-center " >
+            <div className="spinner-border" role="status" id="spinner">
+                <span className="sr-only">Loading...</span>
+            </div>
         </div> 
       )
   }else{

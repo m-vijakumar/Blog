@@ -18,9 +18,9 @@ function AdminNavbar(props){
     });
     const data = await resp.json();
         
-         if(data.success == true){
+         if(data.success === true){
             
-            props.history.push("/");
+            props.history.push("/admin/login");
          }else{
           props.history.push("/admin/login");
          }
@@ -39,6 +39,8 @@ function AdminNavbar(props){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/admin/dashboard">Dashboard</Nav.Link>
+            
             <Nav.Link onClick={logger} href="/admin/login" >Logout</Nav.Link>
           
           </Nav>

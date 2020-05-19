@@ -6,7 +6,7 @@ const blogController = require("../../controllers/blog")
 const tokenHelper = require("../../helpers/sessionVerfiy")
 
 
-// @type    GET
+// @type    POST
 //@route    /api/admin/blog/create
 // @desc    starting router
 // @access  PRAVITE 
@@ -14,33 +14,33 @@ const tokenHelper = require("../../helpers/sessionVerfiy")
 router.post("/create",tokenHelper.sessionVerfiy,blogController.create)
 
 // @type    GET
-//@route    /api/admin/blog/create
+//@route    /api/admin/blog/all-post
 // @desc    starting router
-// @access  PRAVITE 2
+// @access  PUBLIC
 
 router.get("/all-posts",blogController.getAllPosts)
 
 
-// @type    GET
-//@route    /api/admin/blog/create
-// @desc    starting router
-// @access  PRAVITE 2
+// @type    POST
+//@route    /api/admin/blog/post
+// @desc    starting router which required post_id
+// @access  PUBLIC 
 
 router.post("/post",blogController.getPost)
 
 
-// @type    GET
-//@route    /api/admin/blog/create
+// @type    POST
+//@route    /api/admin/blog/update
 // @desc    starting router
-// @access  PRAVITE 2
+// @access  PRAVITE 
 
 router.post("/update",tokenHelper.sessionVerfiy,blogController.updatePost)
 
 
-// @type    GET
-//@route    /api/admin/blog/create
-// @desc    starting router
-// @access  PRAVITE 2
+// @type    DELETE
+//@route    /api/admin/blog/DELETE
+// @desc    starting router to delete post
+// @access  PRAVITE 
 
 router.delete("/delete",tokenHelper.sessionVerfiy,blogController.deletePost)
 

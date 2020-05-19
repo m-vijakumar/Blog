@@ -55,10 +55,11 @@ li{
   color: #61dafb;
 }
 #spinner {
-  top: 30%;
-  left: 50%;
+  top: 50%;
+  left: 40%;
   position: absolute;
-  background: white;
+  background: white; 
+  padding: 2rem;
 }
 #spinner1 {
 

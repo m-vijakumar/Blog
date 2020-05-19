@@ -14,7 +14,8 @@ export default function Update(props) {
 
     const getPostContent = async(e)=>{
         // e.persist();
-        console.log(postId)
+        // console.log(postId)
+        try{
         const response = await fetch('/api/admin/blog/post' , {
             method: "POST",
             headers: {
@@ -23,19 +24,29 @@ export default function Update(props) {
 
             },
             mode:"cors",
+            
             body :JSON.stringify({postId:location.pathname.split("/")[4]})
         })
     
         const data = await response.json();
-        console.log(data.data)
-        setContent(data.data.content)
+        if (data.error === false) {
+          setContent(data.data.content)
+        } else {
+          alert("error..!");
+          props.history.push("/admin/dashboard");
+        }
+        // console.log(data.data)
+      }catch(err){
+        alert("error..!");
+        props.history.push("/admin/dashboard");
+      }
 
     }
 
 
     useEffect(()=>{
 
-      const aboutController = new AbortController()
+      
         try {
             
             setPostId(location.pathname.split("/")[4]);
@@ -45,7 +56,6 @@ export default function Update(props) {
             history.push("/")
         }
 
-        return ()=>aboutController.abort()
     },[])      
 
     const getContent = (content)=>{
@@ -78,20 +88,20 @@ export default function Update(props) {
         body :JSON.stringify(postdata)
       })
       const data = await response.json();
-      console.log(data)
+      // console.log(data)
       if (data.error === false) {
        
-        console.log(data.success)
+        // console.log(data.success)
          props.history.push("/admin/dashboard");
          setSpinner1(false)
         //  setShow(true)
         //return <Redirect to="/Dashboard" />
         
-      }else{setSpinner1(false) ;setMessage(data.msg) }
+      }else{setSpinner1(false) ;alert("intrnal Error...!") }
     
         }
       }catch(e){setSpinner1(false) ;
-         setMessage("Internal Error...")
+         alert("Internal Error...")
          console.log(e)
         }
       }
@@ -104,9 +114,11 @@ export default function Update(props) {
     const sp =  <input type="button" name="register"  value={isSpinner1 ? sp1 :"Update Post"} className="btn btn-primary float-right" onClick={handleSubmit} />
         if (isSpinner) {
           return (
-            <div className="spinner-border " role="status" id="spinner">
-            <span className="sr-only">Loading...</span>
-            </div> 
+            <div className="d-flex justify-content-center " >
+              <div className="spinner-border" role="status" id="spinner">
+                  <span className="sr-only">Loading...</span>
+              </div>
+            </div>
           )
       }else{
         return(

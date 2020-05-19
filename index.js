@@ -47,8 +47,8 @@ s().catch(err => console.log(err))
 // app.use(cookieparser());
 const ss = process.env.NODE_ENV || "development"
 app.get("/",(req,res)=>{
-    req.session.user = "vijay"
-    res.send(req.session.user);
+    
+    res.send("hello");
 });
 
 

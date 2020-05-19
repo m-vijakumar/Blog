@@ -27,7 +27,7 @@ export default  function Dashboard(props) {
         const resp = await fetch("/api/admin/blog/all-posts");
         const postsData = await resp.json();
         await setPosts(postsData.data)
-        console.log(postsData)
+        // console.log(postsData)
         
     }
     const updatePost =async(id,name) =>{
@@ -56,10 +56,10 @@ export default  function Dashboard(props) {
             body :JSON.stringify({postId:id})
           })
           const data = await response.json();
-          console.log(data)
+          // console.log(data)
           if (data.error === false) {
            
-            console.log(data.success)
+            // console.log(data.success)
             
              await getAllPosts()
              
@@ -87,26 +87,36 @@ export default  function Dashboard(props) {
    <span className="sr-only">Loading...</span>
    </div> 
     useEffect(()=>{
-        console.log("sssss")
+        // console.log("sssss")
+        const aboutController = new AbortController()
         userlog();
          getAllPosts();
         
         setSpinner(false)
+
+        return ()=>aboutController.abort()
     },[])
     if (isSpinner) {
         return (
-          <div className="spinner-border " role="status" id="spinner">
-          <span className="sr-only">Loading...</span>
-          </div> 
+          <div className="d-flex justify-content-center " >
+            <div className="spinner-border" role="status" id="spinner">
+                <span className="sr-only">Loading...</span>
+            </div>
+        </div>
         )
     }else{
     return (
         <div>
         <AdminNavbar />
+        
         {isSpinner1? sp : ''}
         <div className="AdminApp">
-        
-            <h1>Welcome</h1>
+        <h1>Welcome</h1>
+        <div className="d-flex justify-content-end" >
+              <a href="/admin/post/create"><button className="btn btn-primary"><h5>Create</h5></button></a>
+            </div>
+            <br />
+            
             {showPosts}
             
             
