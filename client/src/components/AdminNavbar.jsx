@@ -7,16 +7,26 @@ function AdminNavbar(props){
  const  logger = async()=>{
 
   try{
-    const resp = await fetch("/logout");
+    const resp = await fetch("/api/admin/logout",{
+      method:"DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+  
+      },
+      mode:"cors"
+    });
     const data = await resp.json();
-         if(data.success === true){
+        
+         if(data.success == true){
+            
             props.history.push("/");
          }else{
-          props.history.push("/dashboard");
+          props.history.push("/admin/login");
          }
     }catch(e){
         console.log(e);
-        props.history.push("/login");
+        props.history.push("/admin/login");
     }
 
 
@@ -29,7 +39,7 @@ function AdminNavbar(props){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link onClick={logger} href="/" >Logout</Nav.Link>
+            <Nav.Link onClick={logger} href="/admin/login" >Logout</Nav.Link>
           
           </Nav>
          

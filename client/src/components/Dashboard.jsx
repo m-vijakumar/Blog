@@ -3,11 +3,11 @@ import React, { useEffect ,useState} from 'react'
 import AdminNavbar from './AdminNavbar'
 import "./../App.css"
 import Postdetails from './Postdetails';
-import Editor from './Editor';
+import Footer from './Footer';
 
 export default  function Dashboard(props) {
 
-    
+    const [isSpinner1,setSpinner1] =useState(false);
     const [isSpinner,setSpinner]=useState(true);
     const [posts,setPosts]=useState([]);
     const userlog= async ()=>{
@@ -23,10 +23,6 @@ export default  function Dashboard(props) {
         props.history.push("/admin/login");
     }
     }
-    const showPosts = posts.map((post)=>{
-
-        return <Postdetails  post={post}/>
-    })
     const getAllPosts = async()=>{
         const resp = await fetch("/api/admin/blog/all-posts");
         const postsData = await resp.json();
@@ -34,10 +30,66 @@ export default  function Dashboard(props) {
         console.log(postsData)
         
     }
+    const updatePost =async(id,name) =>{
+        setSpinner1(true)
+        props.history.push(`/admin/post/update/${id}/${name}`)
+        setSpinner1(false)
+      
+
+    }
+    const delPost = async(id) =>{
+        try{
+            if( !id  ){
+        
+              alert("Internal Error...!")
+            }else{
+            setSpinner1(true)
+            // e.persist();
+            const response = await fetch('/api/admin/blog/delete' , {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+        
+            },
+            mode:"cors",
+            body :JSON.stringify({postId:id})
+          })
+          const data = await response.json();
+          console.log(data)
+          if (data.error === false) {
+           
+            console.log(data.success)
+            
+             await getAllPosts()
+             
+             setSpinner1(false)
+             
+            //return <Redirect to="/Dashboard" />
+            
+          }else{setSpinner1(false) ;alert("error"+data.msg) }
+        
+            }
+          }catch(e){setSpinner1(false) ;
+             alert("Internal Error...")
+             console.log(e)
+            }
+        setSpinner1(false)
+          alert("Post Deleted...!")
+    }
+
+    const showPosts = posts.map((post)=>{
+
+         return <Postdetails key={post._id} post={post} updatePost={updatePost} delPost={delPost}/>
+    })
+
+   const sp = <div className="spinner-border " role="status" id="spinner" style={{backgroundColor:"transparent"}}>
+   <span className="sr-only">Loading...</span>
+   </div> 
     useEffect(()=>{
         console.log("sssss")
         userlog();
-        getAllPosts();
+         getAllPosts();
         
         setSpinner(false)
     },[])
@@ -51,13 +103,15 @@ export default  function Dashboard(props) {
     return (
         <div>
         <AdminNavbar />
-        <div className="App">
+        {isSpinner1? sp : ''}
+        <div className="AdminApp">
         
             <h1>Welcome</h1>
-            <Editor status={"create"}/>
+            {showPosts}
             
             
         </div>
+        <Footer />
         </div>
         
     )

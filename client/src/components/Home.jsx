@@ -5,8 +5,8 @@ import Footer from './Footer'
 
     const [posts, setPosts] = useState([])
     const showPosts = posts.map((post)=>{
-        const postname = post.title.replace(' ',/[-]/g)
-        return <li key={post._id} > <h6><a href={`/blog/${post._id}/${post.title}`}>{post.title}</a>{" "}{post.createdOn}{" "}[{post.category}]</h6> </li>
+        const postname = post.title.trim().replace(/ /g,"-")
+        return <li key={post._id} > <h6><a href={`/blog/${post._id}/${postname}`}>{post.title}</a>{" "}{post.createdOn}{" "}[{post.category}]</h6> </li>
     })
     const getAllPosts = async()=>{
         const resp = await fetch("/api/admin/blog/all-posts");

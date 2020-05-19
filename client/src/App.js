@@ -10,6 +10,8 @@ import Blogpage from './components/Blogpage';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import Create from './components/Create';
+import Update from './components/Update';
 
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,6 +30,8 @@ function App() {
         <Route exact path="/admin/login" component={Login} />
         <Route exact path="/admin/register" component={Register} />
         <Route exact path="/admin/dashboard" component={Dashboard} />
+        <Route exact path="/admin/post/create" component={Create} />
+        <Route exact path="/admin/post/update/:postId/:postname" component={Update} />
         
       </Router>
     </div>
