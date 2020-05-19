@@ -29,7 +29,15 @@ app.use(session({
     maxAge : 3600000 * 24 *7 
 }))
 
-app.use(express.static("./public"));
+if(process.env.NODE_ENV === 'production'){
+
+    app.use(express.static("client/build"));
+
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client' , 'build' , 'index.html'))
+    })
+}
+
 app.use(cors());
 app.use("/api/admin",require("./routers/api/auth"));
 app.use("/api/admin/blog",require("./routers/api/blog"));
