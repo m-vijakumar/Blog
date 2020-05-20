@@ -30,16 +30,11 @@ app.use(session({
 }))
 app.use(express.static(path.join(__dirname, "client/build")));
 
-if(process.env.NODE_ENV === 'production'){
-
-    
-
     app.get("/*", (req, res) => {
         res.sendFile(path.join(__dirname, "client/build/index.html"), err => {
             res.status(500).send(err);
         });
     });
-}
 
 app.use(cors());
 app.use("/api/admin",require("./routers/api/auth"));
