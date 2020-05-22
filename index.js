@@ -23,8 +23,7 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     cookie:{
-        maxAge : 3600000 * 24 *7 ,
-        secure : process.env.NODE_ENV === 'production'
+        maxAge : 3600000 * 24 *7 
     },
     maxAge : 3600000 * 24 *7 
 }))
