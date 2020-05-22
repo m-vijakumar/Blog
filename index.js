@@ -28,13 +28,7 @@ app.use(session({
     },
     maxAge : 3600000 * 24 *7 
 }))
-app.use(express.static(path.join(__dirname, "client/build")));
 
-    app.get("/*", (req, res) => {
-        res.sendFile(path.join(__dirname, "client/build/index.html"), err => {
-            res.status(500).send(err);
-        });
-    });
 
 app.use(cors());
 app.use("/api/admin",require("./routers/api/auth"));
@@ -52,11 +46,19 @@ s().catch(err => console.log(err))
 
 // app.use(cookieparser());
 const ss = process.env.NODE_ENV || "development"
-app.get("/",(req,res)=>{
+// app.get("/",(req,res)=>{
     
-    res.send("hello");
-});
+//     res.send("hello");
+// });
 
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
+    app.get("/*", (req, res) => {
+        res.sendFile(path.join(__dirname, "client/build/index.html"), err => {
+            res.status(500).send(err);
+        });
+    });
 
 app.listen(port,console.log(`server is running on ${port}..........`));
 
