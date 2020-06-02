@@ -22,7 +22,6 @@
     "helmet": "^3.22.0",
     "mongodb": "^3.3.2",
     "mongoose": "^5.7.1"
-    
   },
   "author": "vijay kumar",
   "license": "ISC"

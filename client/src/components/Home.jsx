@@ -1,8 +1,9 @@
 import React ,{useEffect,useState}from 'react'
 import Header from './Header'
 import Footer from './Footer'
+
 import "./../App.css"
- const Home = () => {
+ const Home = (props) => {
 
     const [posts, setPosts] = useState([])
     const [isSpinner,setSpinner] =useState(true);

@@ -30,13 +30,13 @@ export default function Blogpage(props) {
         if (data.error === false) {
             setContent(data.data.content)
           } else {
-            alert("error..!");
-            props.history.push("/admin/dashboard");
+        
+            props.history.push("/404");
           }
           // console.log(data.data)
         }catch(err){
-          alert("error..!");
-          props.history.push("/admin/dashboard");
+         
+          props.history.push("/404");
         }
 
     }
@@ -67,9 +67,9 @@ export default function Blogpage(props) {
     return (
         <>
         <Header />
-    <div className="jumbotron" style={{backgroundColor:"transparent"}}>
+    <div className="jumbotron" id="blogcontainer" style={{backgroundColor:"transparent"}}>
 
-        <Markdown source={content} escapeHtml={false} />
+        <Markdown source={content.toString()} escapeHtml={false} />
     </div>
     <Footer/>
     </>

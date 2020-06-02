@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import About from './components/About'
 import Home from './components/Home'
@@ -12,6 +12,8 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Create from './components/Create';
 import Update from './components/Update';
+import Error from './components/Error';
+import Feedbacks from './components/Feedbacks';
 
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +23,7 @@ function App() {
 
     <div>
       <Router>
+      <Switch >
         <Route exact path="/" component={Home} />
         <Route exact path="/projects" component={Projects} />
         <Route exact path="/about" component={About} />
@@ -30,8 +33,14 @@ function App() {
         <Route exact path="/admin/login" component={Login} />
         <Route exact path="/admin/register" component={Register} />
         <Route exact path="/admin/dashboard" component={Dashboard} />
+        <Route exact path="/admin/feedbacks" component={Feedbacks} />
         <Route exact path="/admin/post/create" component={Create} />
         <Route exact path="/admin/post/update/:postId/:postname" component={Update} />
+
+        
+        <Route  path="*" component={Error} />
+        </Switch>
+        
         
       </Router>
     </div>

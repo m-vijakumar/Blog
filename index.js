@@ -32,6 +32,7 @@ app.use(session({
 app.use(cors());
 app.use("/api/admin",require("./routers/api/auth"));
 app.use("/api/admin/blog",require("./routers/api/blog"));
+app.use("/api/admin/comments",require("./routers/api/comments"));
 
 const db =require("./setup/connect").mongodbURL;
 const s =async()=>{ 
@@ -45,10 +46,10 @@ s().catch(err => console.log(err))
 
 // app.use(cookieparser());
 const ss = process.env.NODE_ENV || "development"
-// app.get("/",(req,res)=>{
+app.get("/",(req,res)=>{
     
-//     res.send("hello");
-// });
+    res.send("hello");
+});
 
 
 app.use(express.static(path.join(__dirname, "client/build")));

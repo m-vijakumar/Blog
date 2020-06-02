@@ -25,8 +25,8 @@ export default function Editor(props) {
              https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></textarea>
         </div>
 
-        <div>
-        <Markdown source={content} escapeHtml={false} />
+        <div className="jumbotron" id="blogcontainer" style={{background:" transparent",border:"1px solid black"}}>
+        <Markdown source={content.toString()} escapeHtml={false} />
         </div>
     </div>
     )

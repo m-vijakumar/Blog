@@ -1,14 +1,15 @@
 import React, { useEffect ,useState} from 'react'
+// import {Link ,withRouter } from 'react-router-dom'
 import AdminNavbar from './AdminNavbar'
-import "./../App.css"
-import Postdetails from './Postdetails';
+import "./../App.css";
+import Comment from './Comment';
 import Footer from './Footer';
 
-export default  function Dashboard(props) {
+export default  function Feedbacks(props) {
 
     const [isSpinner1,setSpinner1] =useState(false);
     const [isSpinner,setSpinner]=useState(true);
-    const [posts,setPosts]=useState([]);
+    const [comments,setComments]=useState([]);
     const userlog= async ()=>{
 
     try{
@@ -22,21 +23,19 @@ export default  function Dashboard(props) {
         props.history.push("/admin/login");
     }
     }
-    const getAllPosts = async()=>{
-        const resp = await fetch("/api/admin/blog/all-posts");
-        const postsData = await resp.json();
-        await setPosts(postsData.data)
+    const getAllCommemts = async()=>{
+        const resp = await fetch("/api/admin/comments/getfeedbacks");
+        const commentsData = await resp.json();
+        if (commentsData.error === false) {
+            await setComments(commentsData.feedbacks)
+        } else {
+            await setComments([])
+        }
+        
         // console.log(postsData)
         
     }
-    const updatePost =async(id,name) =>{
-        setSpinner1(true)
-        props.history.push(`/admin/post/update/${id}/${name}`)
-        setSpinner1(false)
-      
-
-    }
-    const delPost = async(id) =>{
+    const delComment = async(id) =>{
         try{
             if( !id  ){
         
@@ -44,7 +43,7 @@ export default  function Dashboard(props) {
             }else{
             setSpinner1(true)
             // e.persist();
-            const response = await fetch('/api/admin/blog/delete' , {
+            const response = await fetch('/api/admin/comments/deletefeedback' , {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -52,7 +51,7 @@ export default  function Dashboard(props) {
         
             },
             mode:"cors",
-            body :JSON.stringify({postId:id})
+            body :JSON.stringify({commentId:id})
           })
           const data = await response.json();
           // console.log(data)
@@ -60,14 +59,14 @@ export default  function Dashboard(props) {
            
             // console.log(data.success)
             
-             await getAllPosts()
+             await getAllCommemts()
              
              setSpinner1(false)
-             
+             alert("Post Deleted...!")
             //return <Redirect to="/Dashboard" />
             
           }else{setSpinner1(false) ;alert("error"+data.msg) }
-        
+                return
             }
           }catch(e){setSpinner1(false) ;
              alert("Internal Error...")
@@ -77,9 +76,9 @@ export default  function Dashboard(props) {
           alert("Post Deleted...!")
     }
 
-    const showPosts = posts.map((post)=>{
+    const showComments = comments.map((comment)=>{
 
-         return <Postdetails key={post._id} post={post} updatePost={updatePost} delPost={delPost}/>
+         return <Comment key={comment._id} comment={comment}  delComment={delComment}/>
     })
 
    const sp = <div className="spinner-border " role="status" id="spinner" style={{backgroundColor:"transparent"}}>
@@ -87,13 +86,11 @@ export default  function Dashboard(props) {
    </div> 
     useEffect(()=>{
         // console.log("sssss")
-        const aboutController = new AbortController()
         userlog();
-         getAllPosts();
+         getAllCommemts();
         
         setSpinner(false)
 
-        return ()=>aboutController.abort()
     },[])
     if (isSpinner) {
         return (
@@ -111,12 +108,8 @@ export default  function Dashboard(props) {
         {isSpinner1? sp : ''}
         <div className="AdminApp">
         <h1>Welcome</h1>
-        <div className="d-flex justify-content-end" >
-              <a href="/admin/post/create"><button className="btn btn-primary"><h5>Create</h5></button></a>
-            </div>
-            <br />
             
-            {showPosts}
+            {showComments}
             
             
         </div>

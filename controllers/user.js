@@ -46,55 +46,75 @@ exports.loginValidCredentials = (req,res,next) =>{
     });
 };
 
-exports.register = (req,res) =>{
+exports.register = async(req,res) =>{
 
     const email = req.body.email;
     const password = req.body.password;
-    
-   
-    User.checkIfUserExists(email)
-        .then(async(result)=>{
-            // console.log(result+"&&"+result)
-            if(result && result._id){
-                // console.log(result+"&&"+result._id)
-                return res.status(400).json({
-                    error: true,
-                     msg: "USER_ALREADY_EXISTS"
-                });
-            }
+     
+   await User.find({}).countDocuments()
+        .then(async(r)=>{
 
-            let userobj ={email : email ,password:password }
-            let user = new User(userobj);
-            user.save()
+            if (r < 1) {
+            
+              await User.checkIfUserExists(email)
+                .then(async(result)=>{
+                    // console.log(result+"&&"+result)
+                    if(result && result._id){
+                        // console.log(result+"&&"+result._id)
+                        return res.status(400).json({
+                            error: true,
+                            msg: "USER_ALREADY_EXISTS"
+                        });
+                    }
 
-                .then(()=>{
+                    let userobj ={email : email ,password:password }
+                    let user = new User(userobj);
+                    user.save()
 
-                        const userData = {
-                            id : user.id,
-                            email : user.email,
-                        }  
-                        try {
-                            req.session.user = userData ;
-                            return res.json({
-                                 error:false,
-                                 success:true
-                                })
-                        } catch (error) {
+                        .then(()=>{
+
+                                const userData = {
+                                    id : user.id,
+                                    email : user.email,
+                                }  
+                                try {
+                                    req.session.user = userData ;
+                                    return res.json({
+                                        error:false,
+                                        success:true
+                                        })
+                                } catch (error) {
+                                    return res.json({
+                                        error:true,
+                                        msg:"internal Error...!"
+                                    })
+                                }   
+
+                        })
+                        .catch(e=>{
+                            // console.log(e);
                             return res.json({
                                 error:true,
                                 msg:"internal Error...!"
                             })
-                        }   
+                        })
 
                 })
-                .catch(e=>{
-                    // console.log(e);
-                    return res.json({
-                        error:true,
-                        msg:"internal Error...!"
-                    })
-                })
+                .catch((err)=>{
+                    return res.status(500).json({
+                        error: true,
+                        msg: err.message
+                    });
+                });
 
+            } else {
+                console.log(r)
+                return res.json({
+                    error:true,
+                    msg:"Sorry Your Not Allowed To Register"
+                }) 
+            }
+    
         })
         .catch((err)=>{
             return res.status(500).json({
