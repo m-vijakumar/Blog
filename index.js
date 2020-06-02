@@ -21,7 +21,7 @@ app.use(expressValidator());
 app.use(session({
     secret:require("./setup/connect").TOKEN_KEY,
     resave:false,
-    saveUninitialized:true,
+    saveUninitialized:false,
     cookie:{
         maxAge : 3600000 * 24 *7 
     },
@@ -45,7 +45,7 @@ s().catch(err => console.log(err))
 
 
 // app.use(cookieparser());
-if( process.env.NODE_ENV || "development"){
+if( process.env.NODE_ENV === "development"){
 app.get("/",(req,res)=>{
     
     res.send("hello");

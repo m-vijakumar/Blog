@@ -29,6 +29,7 @@ export default function Blogpage(props) {
         // console.log(data.data)
         if (data.error === false) {
             setContent(data.data.content)
+            setSpinner(false)
           } else {
         
             props.history.push("/404");
@@ -48,7 +49,7 @@ export default function Blogpage(props) {
             
             setPostId(location.pathname.split("/")[2]);
             getContent();
-            setSpinner(false)
+            // setSpinner(false)
         } catch (error) {
             history.push("/")
         }
@@ -57,11 +58,11 @@ export default function Blogpage(props) {
     },[])
     if (isSpinner) {
         return (
-        <div className="d-flex justify-content-center " >
-            <div className="spinner-border" role="status" id="spinner">
-                <span className="sr-only">Loading...</span>
+            <div class="d-flex justify-content-center">
+            <div class="spinner-border" style={{width:"4rem",height:"4rem",marginTop:"150px",marginRight:"5%"}} role="status" >
+              <span class="sr-only">Loading...</span>
             </div>
-        </div>
+          </div>
         )
     }else{
     return (

@@ -9,8 +9,10 @@ import "./../App.css"
     const [isSpinner,setSpinner] =useState(true);
 
     const showPosts = posts.map((post)=>{
+        console.log(post)
+        var date = new Date(post.createdOn)
         const postname = post.title.trim().replace(/ /g,"-")
-        return <li key={post._id} > <h6><a href={`/blog/${post._id}/${postname}`}>{post.title}</a>{" "}{post.createdOn}{" "}[{post.category}]</h6> </li>
+        return <li key={post._id} > <h5><a  href={`/blog/${post._id}/${postname}`}>{post.title}</a>{" "}[{post.category}]<span style={{fontSize:"0.8rem"}}>{" "}{ date.toLocaleDateString().replace(/[/]/g,"-")}</span></h5> </li>
     })
 
     const getAllPosts = async()=>{
@@ -18,28 +20,29 @@ import "./../App.css"
         const postsData = await resp.json();
         await setPosts(postsData.data)
         console.log(postsData)
-        
+        setSpinner(false)
     }
 
     useEffect(() => {
        getAllPosts();
-       setSpinner(false)
+       
     }, [])
 
     if (isSpinner) {
         return (
-        <div className="d-flex justify-content-center " >
-            <div className="spinner-border" role="status" id="spinner">
-                <span className="sr-only">Loading...</span>
+        
+            <div class="d-flex justify-content-center">
+            <div class="spinner-border" style={{width:"4rem",height:"4rem",marginTop:"150px",marginRight:"5%"}} role="status" >
+              <span class="sr-only">Loading...</span>
             </div>
-        </div>
+          </div>
         )
     }else{
     return (
         <div>
             <Header />
             
-            <div>
+            <div style={{fontFamily:"Poppins, sans-serif" ,padding:"5px"}}>
                 <h3>My Blog Pages</h3>
                 <ul>
                     {showPosts}

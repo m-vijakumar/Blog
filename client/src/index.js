@@ -19,6 +19,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //   rootReducer,
 //   composeWithDevTools(applyMiddleware(thunk))
 // )
+
+
 ReactDOM.render(
   // <Provider store={store}>
   //   <App />

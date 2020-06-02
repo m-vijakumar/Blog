@@ -4,6 +4,8 @@
   padding: 5%;
   color: rgb(0, 0, 0);
   background-color: rgba(247, 247, 247, 0.815); 
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 .App:nth-child(odd) {
   /* margin-top:5%; */
@@ -54,12 +56,10 @@ li{
 .App-link {
   color: #61dafb;
 }
-#spinner {
-  top: 50%;
-  left: 40%;
-  position: absolute;
+.spinner {
   background: white; 
   padding: 2rem;
+  margin: 0;
 }
 #spinner1 {
 
@@ -68,7 +68,7 @@ li{
 }
 
 .div-footer{
-  background-color: transparent;
+  background-color:transparent;
   position:sticky;
   left: 0;
   bottom: 0;
@@ -114,3 +114,54 @@ li{
   text-align: center;
   color: rgb(238, 237, 237);
 }
+
+.social-size{
+  font-size: 3rem;
+  transition: transform .3s;
+  color: black;
+  
+}
+
+.social-size:hover{
+  -ms-transform: scale(5); /* IE 9 */
+  -webkit-transform: scale(5); /* Safari 3-8 */
+  transform: scale(1.3); 
+
+}
+.social-div{
+  text-align: center;
+}
+.social-div >a {
+  
+  /* display: inline-block; */
+  margin-right: 30px;
+    /* width: 25%; */
+    
+}
+
+@media screen and (min-width: 500px) {
+  .social-text {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .social-size >a {
+    display: inline-block;
+    width: 25%;
+  }
+  .social-text {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .social-size{
+    font-size: 2rem;
+    transition: transform .5s;
+    color: black;
+    
+  }
+  .social-text {
+    font-size: 2rem;
+  }
+}
+

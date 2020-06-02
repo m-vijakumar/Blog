@@ -78,10 +78,12 @@ function About() {
         })
 
 }
-    useEffect(()=>{    
+    useEffect(()=>{ 
+      setTimeout(() => {
         setSpinner(false)
-        // typing()
-        return ()=> abortController.abort()
+      }, 2000);   
+        
+      
     },[])
 
     const handleChange = e => {
@@ -153,10 +155,10 @@ function About() {
 
     if (isSpinner) {
         return (
-          <div className="d-flex justify-content-center " >
-              <div className="spinner-border" role="status" id="spinner">
-                  <span className="sr-only">Loading...</span>
-              </div>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" style={{width:"4rem",height:"4rem",marginTop:"150px",marginRight:"5%"}} role="status" >
+              <span class="sr-only">Loading...</span>
+            </div>
           </div> 
         )
     }else{
@@ -171,11 +173,13 @@ function About() {
         
             <div className="row justify-content-around">
                 <div className="col-10 col-md-8 ">
-                    <h2>Munikoti VijayKumar</h2>
-                    <li>munikotivijaykumar@gmail.com</li>
-                    <li><a href="https://github.com/munikotivijaykumar" target="_blank" rel="noopener noreferrer" >https://github.com/munikotivijaykumar</a></li>
-                    <li><a href="https://www.linkedin.com/in/munikoti-vijaykumar-28726114a" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/munikoti-vijaykumar-28726114a</a></li>
-                </div>
+                    <h1>Munikoti VijayKumar</h1>
+                    <ul><br />
+                    <li className="mr-3"><i class="fas fa-quote-left"></i>
+                    &nbsp;&nbsp;&nbsp;love your work, work what you love &nbsp;&nbsp;<i class="fas fa-laptop"></i>&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-quote-right"></i></li>
+                    </ul>
+                    </div>
                 <div className="col-6 col-md-4">
                     <img src="vijayedit.jpg" className="logo" alt="profilepic "/>
                 </div>
@@ -187,8 +191,17 @@ function About() {
         <TypedReact />
 
         </div>
+        
         <div className="App" >
         
+        <div className="social-div">
+        <p className="social-text">munikotivijaykumar@gmail.com <i className="fas fa-paper-plane"></i></p> <br />
+        <a href="https://www.linkedin.com/in/munikoti-vijaykumar-28726114a" target="_blank" rel="noopener noreferrer"><i className='fab fa-linkedin social-size ' ></i></a>
+        <a href="https://github.com/munikotivijaykumar" target="_blank" rel="noopener noreferrer" ><i className='fab fa-github social-size ' ></i></a> 
+        <a href="https://www.quora.com/profile/Vijay-Kumar-27238" target="_blank" rel="noopener noreferrer"> <i className='fab fa-quora social-size ' ></i></a>
+        <a href="https://www.instagram.com/vijaykumar_12321/" target="_blank" rel="noopener noreferrer"> <i className='fab fa-instagram social-size ' ></i></a>
+        </div>
+
         </div>
         <div className="App">
         <MyVerticallyCenteredModal
