@@ -45,13 +45,14 @@ s().catch(err => console.log(err))
 
 
 // app.use(cookieparser());
-if( process.env.NODE_ENV === "development"){
-app.get("/",(req,res)=>{
+// if( process.env.NODE_ENV === "development"){
+// app.get("/",(req,res)=>{
     
-    res.send("hello");
-});
+//     res.send("hello");
+// });
 
-}
+// }
+
 app.use(express.static(path.join(__dirname, "client/build")));
 
     app.get("/*", (req, res) => {

@@ -4,6 +4,7 @@ import '../App.css';
 import Footer from './Footer';
 import {Button , Modal} from "react-bootstrap"
 import Typed from "typed.js"
+import { Helmet } from 'react-helmet';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 class TypedReact extends React.Component {

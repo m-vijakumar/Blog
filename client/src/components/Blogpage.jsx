@@ -2,10 +2,12 @@ import React ,{useState,useEffect} from 'react'
 import { useLocation, useHistory } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
+import { Helmet } from 'react-helmet';
 const Markdown = require('react-markdown');
 export default function Blogpage(props) {
     const [content, setContent] = useState("");
     const [postId , setPostId] = useState("");
+    const [postName , setPostName] = useState("Blog");
     const [isSpinner,setSpinner] =useState(true);
     // const [postName , setPostName] = useState("");
     const location = useLocation();
@@ -48,6 +50,7 @@ export default function Blogpage(props) {
         try {
             
             setPostId(location.pathname.split("/")[2]);
+            setPostName(location.pathname.split("/")[3]);
             getContent();
             // setSpinner(false)
         } catch (error) {
@@ -67,6 +70,20 @@ export default function Blogpage(props) {
     }else{
     return (
         <>
+        <Helmet >
+          <title>{setPostName}{" "} | Munikoti Vijaykumar</title>
+          <meta name="description" content={{postName}} />
+
+          <meta property="og:site_name" content="munikotivijaykumar" />
+          <meta property="og:type" content="Blog" />
+          <meta property="og:title" content={setPostName} />
+          <meta name="theme-color" content="#ffffff" />   
+          <meta property="og:url" content="http://munikotivijaykumar.xyz" />
+          <meta name="twitter:title" content={setPostName}/>
+          <meta name="twitter:description" content={setPostName} />
+          <meta property="og:description" content={setPostName} />
+        
+        </Helmet>
         <Header />
     <div className="jumbotron" id="blogcontainer" style={{backgroundColor:"transparent"}}>
 

@@ -2,10 +2,17 @@ import React from 'react'
 import '../App.css';
 import Footer from './Footer'
 import Header from './Header'
+import { Helmet } from 'react-helmet';
 
 export default function Projects() {
     return (
         <div>
+        <Helmet >
+  
+        <title> Projects | Munikoti Vijaykumar</title>
+        <meta name="description" content="MunikotiVijaykumar - projects" />
+       
+        </Helmet>
             <Header />
             <div className="App">
                 <h2>Web devlopment M[Mongodb] E[ExpressJs] R[ReactJs] N[NodeJs]</h2>
