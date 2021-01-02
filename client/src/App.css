@@ -146,7 +146,7 @@ li{
 }
 @media screen and (max-width: 400px) {
   .social-text {
-    font-size: 0.9rem;
+    font-size: 0.93rem;
   }
 }
 @media screen and (max-width: 500px) {

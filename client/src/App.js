@@ -42,18 +42,20 @@ function App() {
 
     <title>Munikoti Vijaykumar</title>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="./images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="./images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="./images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="./images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="./images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="./images/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="152x152" href="./images/android-chrome-512x512.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./images/android-chrome-192x192.png" />
+    <script data-ad-client="ca-pub-9315856882690881" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="152x152" href="images/android-chrome-512x512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png" />
     
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-    <link rel="icon" type="image/png"  sizes="16x16" href="./images/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png"  sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="manifest" href="images/site.webmanifest.json" />
     </Helmet>
 
       <Router>

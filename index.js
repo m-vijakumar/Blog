@@ -44,7 +44,6 @@ await mongoose
 s().catch(err => console.log(err))
 
 
-// app.use(cookieparser());
 // if( process.env.NODE_ENV === "development"){
 // app.get("/",(req,res)=>{
     
